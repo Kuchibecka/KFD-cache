@@ -1,7 +1,10 @@
 package com.example.cache.model.entity
 
+import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.OneToMany
 
 @Entity
 class Note(
@@ -9,5 +12,11 @@ class Note(
     var title: String,
 
     @Column(nullable = false, length = 1023)
-    var content: String
+    var content: String,
+
+    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
+    @JoinColumn(name = "page_id")
+    var pages: MutableList<Page>
+
+
 ) : AbstractEntity()

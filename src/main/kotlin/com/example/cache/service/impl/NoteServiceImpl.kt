@@ -5,11 +5,9 @@ import com.example.cache.model.dto.request.NoteRequest
 import com.example.cache.model.entity.Note
 import com.example.cache.model.repository.NoteDao
 import com.example.cache.service.NoteService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.CachePut
 import org.springframework.cache.annotation.Cacheable
-import org.springframework.context.ApplicationContext
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.stereotype.Service
 
@@ -33,6 +31,7 @@ class NoteServiceImpl(
     override fun update(id: Long, request: NoteRequest): Note = findById(id).apply {
         content = request.content
         title = request.title
+        pages = request.pages
         noteDao.save(this)
     }
 
